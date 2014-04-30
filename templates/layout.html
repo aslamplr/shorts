@@ -1,0 +1,78 @@
+{%- block layout -%}
+<!DOCTYPE HTML>
+<html lang="en">
+{%- block head %}
+  <head>
+    <title>Shorts - {% block title %}{% endblock title %}</title>
+   {% block meta %}
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+   {% endblock meta %}
+	{%- block noscripts %}
+	<link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet"/>
+	<link href="{{ url_for('static',filename='js/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet"/>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet" />
+	{% endblock noscripts -%}
+	{% block scripts %}
+	<script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+	{% endblock scripts %}
+  </head>
+{%- endblock head -%}
+{%- block body %}
+  <body class="homepage">
+	<div class="container">
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<a class="navbar-brand" href="/">
+				<img style="max-width:100px; margin-top: -7px;" 
+					src="{{ url_for('static',filename='images/logo.png') }}" alt="Shorts">
+			</a>
+			<p class="navbar-text" style="margin-top: 40px;">The short film finder</p>
+			{% if 'oauth_token' not in session %}
+			<p class="navbar-text navbar-right">
+				<a href="{{ url_for('login',next='/') }}" 
+							id="facebook-btn" 
+								class="btn btn-default navbar-btn responsive-image"></a>
+			</p>
+			{% elif 'oauth_token' in session %}
+			<p class="navbar-text navbar-right">
+				<img src="{{ session['profile_pic_small'] }}" class="img-rounded"/>
+				<a href="#"> {{ session['me']['name'] }} </a>
+				<a href="{{ url_for('logout',next='/') }}" class="btn btn-default navbar-btn"> Log off </a>
+			</p>
+			{% endif %}
+		</div>
+	</div>
+	{%- with messages = get_flashed_messages(with_categories=true) -%}
+	{%- if messages -%}
+		<br>
+		{%- for category, message in messages -%}
+		<div class="alert alert-{{ category }} alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<strong>{{ message }}</strong>
+		</div>
+		{%- endfor -%}
+		<br>
+	{%- endif -%}
+	{%- endwith -%}
+	
+   {% block main -%}
+   {%- endblock main %}
+   </div>
+	{% block scripts_body %}
+	{% endblock scripts_body %}
+  </body>
+{% endblock body -%}
+</html>
+{%- endblock layout -%}

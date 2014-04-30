@@ -1,0 +1,16 @@
+{%- extends "layout.html" -%}
+{% block title %}{{ title }}{% endblock %}
+{%- block main -%}
+	{{ html_content|safe }}
+	<!--
+	<form class="form-inline" role="form" action="/user_list/" method="post">
+            <div class="form-group"><label for="inputemail">Email</label>
+				<input type="email" class="form-control" id="inputemail" placeholder="Enter email" name="email">
+			</div>
+			<div class="form-group"><label for="inputname">Name</label>
+				<input type="text" class="form-control" id="inputname" placeholder="Enter Full Name" name="name">
+			</div>
+            <button type="submit" class="btn btn-default">Enter</button>
+	</form><br><hr><br><br><br>
+	-->
+{%- endblock main -%}

@@ -1,0 +1,23 @@
+body { padding-top: 120px; }
+
+img.responsive-image{
+        height:auto;
+        width:100%;
+    }
+
+#facebook-btn {
+	display: block;
+	width: 60px;
+    height: 30px;
+    background: url(/static/images/facebook_login_buttons/active_200.png) no-repeat;
+	background-size: 60px 30px;
+}
+#facebook-btn:hover {
+    background: url(/static/images/facebook_login_buttons/pressed_200.png) no-repeat;
+	background-size: 60px 30px;
+}
+
+.starRating span { width:24px; height:24px; background-image: url(/static/images/stars.png); display:inline-block; cursor: pointer; background-position: -24px 0; }
+.starRating span.chosen { background-position: 0 0; }
+.starRating:hover span { background-position: -24px 0; }
+.starRating:hover span.hoverChosen { background-position: 0 0; }
